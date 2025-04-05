@@ -3,6 +3,7 @@ import ThemeProvider from "./providers/page";
 import Footer from "@/widgets/footer";
 
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -17,13 +18,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <header>
+
             <Header />
-          </header>
           {children}
-          <footer>
             <Footer />
-          </footer>
         </ThemeProvider>
       </body>
     </html>
