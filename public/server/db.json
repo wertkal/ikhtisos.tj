@@ -14,7 +14,15 @@
             "userPhone": "98-726-6150",
             "role": "client",
             "password": "333kurbonikallakalon333",
-            "confirmPassword": "333kurbonikallakalon333"
+            "confirmPassword": "333kurbonikallakalon333",
+            "notification": [
+                {
+                    "professionName": "Агрокимиё ва хокшиносӣ",
+                    "professionId": "i8j2627h2u",
+                    "createAt": "2025-03-24T12:50:21.535Z",
+                    "notification": false
+                }
+            ]
         }
     ],
     "data": [
@@ -30,7 +38,7 @@
             ]
         },
         {
-            "5st group of specialties": "Иқтисод ва география",
+            "4st group of specialties": "Иқтисод ва география",
             "profession": [
                 {
                     "professionName": "Андоз ва андозбандӣ",
@@ -72,16 +80,6 @@
                     "notification": false
                 }
             ]
-    },
-    {
-        "notification": [
-            {
-                "professionName": "Агрокимиё ва хокшиносӣ",
-                "professionId": "i8j2627h2u",
-                "createAt": "2025-03-24T12:50:21.535Z",
-                "notification": false
-            }
-        ]
-    }
-]
+        }
+    ]
 }

@@ -9,37 +9,44 @@ import { Button } from "@/shared/ui/button"
 import "@/app/styles/globals.css"
 import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
+import { usePathname } from 'next/navigation'
 
 const Header = () => {
   let { theme, setTheme } = useTheme()
 
+  let router = usePathname()
+  console.log(router);
+
   let { t, i18n } = useTranslation()
 
   return (
-    <div className='flex items-center justify-between w-[1360px] fixed m-auto p-[5px_30px] bg-blue-300 dark:text-gray-900 '>
+    <div className='flex items-center justify-between w-[1360px] fixed m-auto p-[5px_30px] bg-green-200 dark:text-gray-900 '>
       <div className="flex">
         <Image src={img} width={70} height={70} alt='Ikhtisos.tj' />
         <h1 className='text-[20px] font-semibold relative top-[15px] '>Ikhtisos.tj</h1>
       </div>
-      <div className="flex items-center justify-between w-[20%] relative bottom-[3px] ">
-        <Link href={"/"}>
-          <h1>Асосӣ</h1>
+      <div className="flex items-center justify-around w-[48%] relative bottom-[3px] ">
+        <Link href={"/client"}>
+          <h1 className={`text-[18px] font-semibold hover:text-orange-500 hover:scale-110 ${router == "/client" && ("text-blue-600")} `}>Асосӣ</h1>
         </Link>
-        <Link href={"/aboutUs"}>
-          <h1>Дар бораи мо</h1>
+        <Link href={"/client/aboutUs"}>
+          <h1 className={`text-[18px] font-semibold hover:text-orange-500 hover:scale-110 ${router == "/client/aboutUs" && ("text-blue-600")} `}>Дар бораи мо</h1>
         </Link>
-        <Link href={"/information"}>
-          <h1>{t("Header.3")}</h1>
+        <Link href={"/client/selectedSpecialty"}>
+          <h1 className={`text-[18px] font-semibold hover:text-orange-500 hover:scale-110 ${router == "/client/selectedSpecialty" && ("text-blue-600")} `}>Ихтисоси интихоб шуда</h1>
         </Link>
-        <Link href={"/aboutUs"}>
-          <h1>{t("Header.4")}</h1>
+        <Link href={"/client/news"}>
+          <h1 className={`text-[18px] font-semibold hover:text-orange-500 hover:scale-110 ${router == "/client/news" && ("text-blue-600")} `}>Ахбор</h1>
         </Link>
-        <Link href={"/"}>
-          <h1>{t("Header.5")}</h1>
+        <Link href={"/client/specialBot"}>
+          <h1 className={`text-[18px] font-semibold hover:text-orange-500 hover:scale-110 ${router == "/client/specialBot" && ("text-blue-600")} `}>Боти Махсус</h1>
         </Link>
       </div>
-      <div className="flex justify-between w-[190px] relative ">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#fff"></rect>
+      <div className="flex justify-between w-[270px] relative ">
+        {
+          <button className='bg-blue-400 text-white w-[85px] h-[35px] rounded-[5px] '>Sign Up</button>
+        }
+        <svg className='hover:scale-125 hover:transition-all hover:transition-discrete hover:text-gray-400 ' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#fff"></rect>
           <path d="M1.638,5.846H30.362c-.711-1.108-1.947-1.846-3.362-1.846H5c-1.414,0-2.65,.738-3.362,1.846Z" fill="#a62842"></path>
           <path d="M2.03,7.692c-.008,.103-.03,.202-.03,.308v1.539H31v-1.539c0-.105-.022-.204-.03-.308H2.03Z" fill="#a62842"></path>
           <path fill="#a62842" d="M2 11.385H31V13.231H2z"></path>

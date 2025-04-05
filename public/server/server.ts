@@ -1,0 +1,194 @@
+import express from "express";
+import fs from "fs";
+import cors from "cors";
+import bodyParser from "body-parser";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import path from "path";
+
+// Настройка приложения
+const app = express();
+const DB_PATH = "./db.json";
+const SECRET = "ikhtisos-secret";
+
+app.use(cors());
+app.use(bodyParser.json());
+
+// Чтение и запись в базу данных
+function readDB() {
+  return JSON.parse(fs.readFileSync(DB_PATH, "utf-8"));
+}
+
+function writeDB(data: any) {
+  fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+}
+
+// МИДЛВЕРА для аутентификации
+function authMiddleware(req: express.Request, res: express.Response, next: express.NextFunction) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) return res.status(401).json({ message: "Unauthorized" });
+
+  try {
+    const token = authHeader.split(" ")[1];
+    const user = jwt.verify(token, SECRET);
+    req.user = user;
+    next();
+  } catch {
+    return res.status(401).json({ message: "Invalid token" });
+  }
+}
+
+// Роуты аутентификации ---------------------------------
+app.post("/api/register", async (req: any, res: any) => {
+  const { userName, userEmail, userPhone, password, confirmPassword } = req.body;
+  const db = readDB();
+  const userExists = db.users.find((u: any) => u.userEmail === userEmail);
+  if (userExists) return res.status(400).json({ message: "User already exists" });
+
+  if (password !== confirmPassword) return res.status(400).json({ message: "Passwords do not match" });
+
+  const hashed = await bcrypt.hash(password, 10);
+  const newUser = {
+    userName,
+    userEmail,
+    userPhone,
+    role: "client",
+    password: hashed,
+    notification: []
+  };
+  db.users.push(newUser);
+  writeDB(db);
+  res.json({ message: "Registered successfully" });
+});
+
+app.post("/api/login", async (req: any, res: any) => {
+  const { userEmail, password } = req.body;
+  const db = readDB();
+  const user = db.users.find((u: any) => u.userEmail === userEmail);
+  if (!user) return res.status(400).json({ message: "User not found" });
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+
+  const token = jwt.sign({ userEmail: user.userEmail, role: user.role }, SECRET);
+  res.json({ token });
+});
+
+// GET CLUSTERS ----------------------------------------
+app.get("/api/clusters", (req: any, res: any) => {
+  const db = readDB();
+  res.json(db.data);
+});
+
+// GET PROFESSIONS -------------------------------------
+app.get("/api/professions", (req: any, res: any) => {
+  const db = readDB();
+  const professions = db.data.flatMap((group: any) => group.profession);
+  res.json(professions);
+});
+
+// Добавление в избранное
+app.post("/api/favorites", authMiddleware, (req: any, res: any) => {
+  const { professionId } = req.body;
+  const db = readDB();
+  const user = db.users.find((u: any) => u.userEmail === req.user.userEmail);
+  const allProfessions = db.data.flatMap((group: any) => group.profession);
+  const prof = allProfessions.find((p: any) => p.professionId === professionId);
+  if (!prof) return res.status(404).json({ message: "Profession not found" });
+
+  if (!user.notification) user.notification = [];
+  const alreadyAdded = user.notification.find((n: any) => n.professionId === professionId);
+  if (alreadyAdded) return res.status(400).json({ message: "Already in favorites" });
+
+  user.notification.push({
+    professionId: prof.professionId,
+    professionName: prof.professionName,
+    createAt: new Date().toISOString(),
+    notification: false
+  });
+
+  writeDB(db);
+  res.json({ message: "Added to favorites" });
+});
+
+// Получение избранных
+app.get("/api/favorites", authMiddleware, (req: any, res: any) => {
+  const db = readDB();
+  const user = db.users.find((u: any) => u.userEmail === req.user.userEmail);
+  res.json(user.notification || []);
+});
+
+// ENDPOINT для переводов
+app.get("/api/translations/:lang", (req: any, res: any) => {
+  const { lang } = req.params;
+  try {
+    const translations = JSON.parse(fs.readFileSync(path.join("./locales", `${lang}.json`), "utf-8"));
+    res.json(translations);
+  } catch {
+    res.status(404).json({ message: "Translation not found" });
+  }
+});
+
+// Новостные данные
+app.get("/api/news", (req: any, res: any) => {
+  const news = JSON.parse(fs.readFileSync("./news.json", "utf-8"));
+  const twoDaysAgo = Date.now() - 2 * 24 * 60 * 60 * 1000;
+  const filtered = news.filter((n: any) => new Date(n.date).getTime() >= twoDaysAgo);
+  res.json(filtered);
+});
+
+// Роуты администратора для управления профессиями
+app.post("/api/admin/profession", authMiddleware, (req: any, res: any) => {
+  const { groupName, professionName } = req.body;
+  const db = readDB();
+  if (req.user.role !== "admin") return res.status(403).json({ message: "Access denied" });
+
+  const group = db.data.find((g: any) => Object.values(g).includes(groupName));
+  if (!group) return res.status(404).json({ message: "Group not found" });
+
+  const newProfession = {
+    professionName,
+    professionId: Math.random().toString(36).substr(2, 10),
+    createAt: new Date().toISOString(),
+    notification: false
+  };
+
+  group.profession.push(newProfession);
+  writeDB(db);
+  res.json({ message: "Profession added", profession: newProfession });
+});
+
+app.put("/api/admin/profession/:id", authMiddleware, (req: any, res: any) => {
+  const { id } = req.params;
+  const { newName } = req.body;
+  const db = readDB();
+  if (req.user.role !== "admin") return res.status(403).json({ message: "Access denied" });
+
+  const prof = db.data.flatMap((g: any) => g.profession).find((p: any) => p.professionId === id);
+  if (!prof) return res.status(404).json({ message: "Profession not found" });
+
+  prof.professionName = newName;
+  writeDB(db);
+  res.json({ message: "Profession updated", profession: prof });
+});
+
+app.delete("/api/admin/profession/:id", authMiddleware, (req: any, res: any) => {
+  const { id } = req.params;
+  const db = readDB();
+  if (req.user.role !== "admin") return res.status(403).json({ message: "Access denied" });
+
+  let deleted = false;
+  db.data.forEach((group: any) => {
+    const before = group.profession.length;
+    group.profession = group.profession.filter((p: any) => p.professionId !== id);
+    if (group.profession.length < before) deleted = true;
+  });
+
+  if (!deleted) return res.status(404).json({ message: "Profession not found" });
+
+  writeDB(db);
+  res.json({ message: "Profession deleted" });
+});
+
+// Запуск сервера
+app.listen(5000, () => console.log("Server running on http://localhost:5000"));
