@@ -19,7 +19,9 @@ const Header = () => {
   console.log(router);
 
   let { t, i18n } = useTranslation()
-
+  if(router == "/login" || router == "/register" ){
+    return ""
+  }
   return (
     <div className='' style={{background: "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)"}}>
       <Maxwidth>
@@ -47,7 +49,7 @@ const Header = () => {
       </div>
       <div className="flex justify-between w-[270px] relative ">
         {
-          <button className='bg-blue-400 text-white w-[85px] h-[35px] rounded-[5px] relative left-[140px]'>Sign Up</button>
+         <Link href={"/login"}><button className='bg-blue-400 text-white w-[85px] h-[35px] rounded-[5px] relative left-[140px] cursor-pointer'>Sign Up</button></Link>
         }
         <Button
           variant="ghost"

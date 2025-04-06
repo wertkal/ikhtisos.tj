@@ -1,85 +1,390 @@
 {
-    "users": [
+  "users": [
+    {
+      "userName": "zabirov kholid",
+      "userEmail": "zabirovkholid@gmail.com",
+      "userPhone": "55-666-9562",
+      "role": "admin",
+      "password": "123kholid333",
+      "confirmPassword": "123kholid33",
+      "id": "5e36"
+    },
+    {
+      "userName": "aliev muhammad",
+      "userEmail": "aliev@gmail.com",
+      "userPhone": "98-726-6150",
+      "role": "client",
+      "password": "333kurbonikallakalon333",
+      "confirmPassword": "333kurbonikallakalon333",
+      "notification": [
         {
-            "userName": "zabirov kholid",
-            "userEmail": "zabirovkholid@gmail.com",
-            "userPhone": "55-666-9562",
-            "role": "admin",
-            "password": "123kholid333",
-            "confirmPassword": "123kholid33"
-        },
-        {
-            "userName": "aliev muhammad",
-            "userEmail": "aliev@gmail.com",
-            "userPhone": "98-726-6150",
-            "role": "client",
-            "password": "333kurbonikallakalon333",
-            "confirmPassword": "333kurbonikallakalon333",
-            "notification": [
-                {
-                    "professionName": "Агрокимиё ва хокшиносӣ",
-                    "professionId": "i8j2627h2u",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false
-                }
-            ]
+          "professionName": "Агрокимиё ва хокшиносӣ",
+          "professionId": "i8j2627h2u",
+          "createAt": "2025-03-24T12:50:21.535Z",
+          "notification": false
         }
-    ],
-    "data": [
+      ],
+      "id": "cf90"
+    },
+    {
+      "id": "bf86",
+      "userName": "zabirovkholid@gmail.com",
+      "password": "123kholoid333"
+    },
+    {
+      "id": "ccb1",
+      "userName": "kjkjjlj",
+      "password": "pkj;lj"
+    },
+    {
+      "id": "ad0a",
+      "userName": "zabirovkholid@gmail.com",
+      "password": "123kholid333"
+    },
+    {
+      "id": "6d00",
+      "userName": "usmon",
+      "fullName": "ibragimovusmon",
+      "email": "ibragimovusmon@gmail.com",
+      "password": "123usmon",
+      "confirmPassword": "123usmon"
+    }
+  ],
+  "data": [
+    {
+      "group": "1st group of specialties",
+      "category": "Филология, педагогика ва санъат",
+      "profession": [
         {
-            "5st group of specialties": "Табиӣ ва техникӣ",
-            "profession": [
-                {
-                    "professionName": "Web-дизайн ва графикаи компютерӣ",
-                    "professionId": "1kkkk28276",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false
-                }
-            ]
+          "professionName": "Web-журналистика",
+          "professionId": "p101",
+          "createAt": "2025-03-24T12:50:21.535Z",
+          "notification": false
         },
         {
-            "4st group of specialties": "Иқтисод ва география",
-            "profession": [
-                {
-                    "professionName": "Андоз ва андозбандӣ",
-                    "professionId": "3iijene787",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false
-                }
-            ]
+          "professionName": "Омӯзгори забони тоҷикӣ",
+          "professionId": "p102",
+          "createAt": "2025-03-25T10:12:01.000Z",
+          "notification": false
         },
         {
-            "3st group of specialties": "Филология, педагогика ва санъат",
-            "profession": [
-                {
-                    "professionName": "Web-журналистика",
-                    "professionId": "m3855gd6j3",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false
-                }
-            ]
+          "professionName": "Омӯзгори забони англисӣ",
+          "professionId": "p103",
+          "createAt": "2025-03-25T11:45:11.000Z",
+          "notification": false
         },
         {
-            "4st group of specialties": "Ҷомеашиносӣ ва ҳуқуқ",
-            "profession": [
-                {
-                    "professionName": "Бойгоншиносӣ",
-                    "professionId": "8j3ikdh2w9",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false
-                }
-            ]
+          "professionName": "Омӯзгори синфҳои ибтидоӣ",
+          "professionId": "p104",
+          "createAt": "2025-03-25T13:00:00.000Z",
+          "notification": false
         },
         {
-            "5st group of specialties": "Тиб, биология ва варзиш",
-            "profession": [
-                {
-                    "professionName": "Агрокимиё ва хокшиносӣ",
-                    "professionId": "i8j2627h2u",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false
-                }
-            ]
+          "professionName": "Санъати актёрӣ",
+          "professionId": "p105",
+          "createAt": "2025-03-25T14:30:21.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Санъати мусиқӣ",
+          "professionId": "p106",
+          "createAt": "2025-03-25T15:45:32.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Журналистикаи телевизионӣ",
+          "professionId": "p107",
+          "createAt": "2025-03-25T16:50:45.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Омӯзгори расмкашӣ",
+          "professionId": "p108",
+          "createAt": "2025-03-26T08:15:10.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Хореография",
+          "professionId": "p109",
+          "createAt": "2025-03-26T09:22:30.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Психологияи педагогикӣ",
+          "professionId": "p110",
+          "createAt": "2025-03-26T10:05:55.000Z",
+          "notification": false
         }
-    ]
+      ],
+      "id": "c8df"
+    },
+    {
+      "group": "2nd group of specialties",
+      "category": "Иқтисод ва география",
+      "profession": [
+        {
+          "professionName": "Андоз ва андозбандӣ",
+          "professionId": "p201",
+          "createAt": "2025-03-24T12:50:21.535Z",
+          "notification": false
+        },
+        {
+          "professionName": "Иқтисоди ҷаҳонӣ",
+          "professionId": "p202",
+          "createAt": "2025-03-25T10:05:12.241Z",
+          "notification": false
+        },
+        {
+          "professionName": "Молия ва қарз",
+          "professionId": "p203",
+          "createAt": "2025-03-25T11:10:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Банкинг",
+          "professionId": "p204",
+          "createAt": "2025-03-25T12:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "География ва сайёҳӣ",
+          "professionId": "p205",
+          "createAt": "2025-03-25T13:33:19.876Z",
+          "notification": false
+        },
+        {
+          "professionName": "Маркетинг",
+          "professionId": "p206",
+          "createAt": "2025-03-25T14:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Бизнес-идоракунӣ",
+          "professionId": "p207",
+          "createAt": "2025-03-25T15:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Логистика",
+          "professionId": "p208",
+          "createAt": "2025-03-25T16:30:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Суғурта",
+          "professionId": "p209",
+          "createAt": "2025-03-25T17:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Иқтисоди рақамӣ",
+          "professionId": "p210",
+          "createAt": "2025-03-25T18:00:00.000Z",
+          "notification": false
+        }
+      ],
+      "id": "707b"
+    },
+    {
+      "group": "3rd group of specialties",
+      "category": "Ҷомеашиносӣ ва ҳуқуқ",
+      "profession": [
+        {
+          "professionName": "Бойгоншиносӣ",
+          "professionId": "p301",
+          "createAt": "2025-03-24T12:50:21.535Z",
+          "notification": false
+        },
+        {
+          "professionName": "Ҳуқуқшиносӣ",
+          "professionId": "p302",
+          "createAt": "2025-03-25T08:40:45.222Z",
+          "notification": false
+        },
+        {
+          "professionName": "Илмҳои сиёсат",
+          "professionId": "p303",
+          "createAt": "2025-03-26T15:18:30.600Z",
+          "notification": false
+        },
+        {
+          "professionName": "Ҷомеашиносӣ",
+          "professionId": "p304",
+          "createAt": "2025-03-26T16:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Сиёсатшиносӣ",
+          "professionId": "p305",
+          "createAt": "2025-03-26T17:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Муносибатҳои байналхалқӣ",
+          "professionId": "p306",
+          "createAt": "2025-03-27T09:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Идоракунии давлатӣ",
+          "professionId": "p307",
+          "createAt": "2025-03-27T10:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Мақомоти судӣ",
+          "professionId": "p308",
+          "createAt": "2025-03-27T11:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Сосиология",
+          "professionId": "p309",
+          "createAt": "2025-03-27T12:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Менеҷмент иҷтимоӣ",
+          "professionId": "p310",
+          "createAt": "2025-03-27T13:00:00.000Z",
+          "notification": false
+        }
+      ],
+      "id": "144b"
+    },
+    {
+      "group": "4th group of specialties",
+      "category": "Табиӣ ва техникӣ",
+      "profession": [
+        {
+          "professionName": "Web-дизайн ва графикаи компютерӣ",
+          "professionId": "p401",
+          "createAt": "2025-03-24T12:50:21.535Z",
+          "notification": false
+        },
+        {
+          "professionName": "Физика",
+          "professionId": "p402",
+          "createAt": "2025-03-25T09:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Математикаи амалӣ",
+          "professionId": "p403",
+          "createAt": "2025-03-25T10:15:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Химияи муҳандисӣ",
+          "professionId": "p404",
+          "createAt": "2025-03-25T11:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Информатика ва Технология",
+          "professionId": "p405",
+          "createAt": "2025-03-25T12:20:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Муҳандисии барқ",
+          "professionId": "p406",
+          "createAt": "2025-03-25T13:10:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Архитектура",
+          "professionId": "p407",
+          "createAt": "2025-03-25T14:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Муҳандисии роҳсозӣ",
+          "professionId": "p408",
+          "createAt": "2025-03-25T15:20:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Технологияҳои мобилӣ",
+          "professionId": "p409",
+          "createAt": "2025-03-25T16:30:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Барномасозии компютерӣ",
+          "professionId": "p410",
+          "createAt": "2025-03-25T17:45:00.000Z",
+          "notification": false
+        }
+      ],
+      "id": "c75c"
+    },
+    {
+      "group": "5th group of specialties",
+      "category": "Тиб, биология ва варзиш",
+      "profession": [
+        {
+          "professionName": "Агрокимиё ва хокшиносӣ",
+          "professionId": "p501",
+          "createAt": "2025-03-24T12:50:21.535Z",
+          "notification": false
+        },
+        {
+          "professionName": "Биологияи тиббӣ",
+          "professionId": "p502",
+          "createAt": "2025-03-26T08:30:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Фарматсевтика",
+          "professionId": "p503",
+          "createAt": "2025-03-26T09:00:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Тибби умумӣ",
+          "professionId": "p504",
+          "createAt": "2025-03-26T10:10:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Стоматология",
+          "professionId": "p505",
+          "createAt": "2025-03-26T11:15:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Ветеринария",
+          "professionId": "p506",
+          "createAt": "2025-03-26T12:30:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Физиотерапия",
+          "professionId": "p507",
+          "createAt": "2025-03-26T13:45:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Тарбияи ҷисмонӣ",
+          "professionId": "p508",
+          "createAt": "2025-03-26T14:30:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Биотехнология",
+          "professionId": "p509",
+          "createAt": "2025-03-26T15:40:00.000Z",
+          "notification": false
+        },
+        {
+          "professionName": "Экология ва муҳити зист",
+          "professionId": "p510",
+          "createAt": "2025-03-26T16:55:00.000Z",
+          "notification": false
+        }
+      ],
+      "id": "fd01"
+    }
+  ]
 }
