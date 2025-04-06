@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import fs from "fs";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -6,7 +6,14 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import path from "path";
 
-// Настройка приложения
+declare global {
+  namespace Express {
+    interface Request {
+      user?: any; // Указываем тип данных для user
+    }
+  }
+}
+
 const app = express();
 const DB_PATH = "./db.json";
 const SECRET = "ikhtisos-secret";
@@ -39,7 +46,7 @@ function authMiddleware(req: express.Request, res: express.Response, next: expre
 }
 
 // Роуты аутентификации ---------------------------------
-app.post("/api/register", async (req: any, res: any) => {
+app.post("/api/register", async (req: Request, res: any) => {
   const { userName, userEmail, userPhone, password, confirmPassword } = req.body;
   const db = readDB();
   const userExists = db.users.find((u: any) => u.userEmail === userEmail);
@@ -61,7 +68,7 @@ app.post("/api/register", async (req: any, res: any) => {
   res.json({ message: "Registered successfully" });
 });
 
-app.post("/api/login", async (req: any, res: any) => {
+app.post("/api/login", async (req: Request, res: any) => {
   const { userEmail, password } = req.body;
   const db = readDB();
   const user = db.users.find((u: any) => u.userEmail === userEmail);
@@ -74,21 +81,27 @@ app.post("/api/login", async (req: any, res: any) => {
   res.json({ token });
 });
 
-// GET CLUSTERS ----------------------------------------
-app.get("/api/clusters", (req: any, res: any) => {
-  const db = readDB();
-  res.json(db.data);
+// Получение переводов (русский, таджикский, английский)
+app.get("/api/translations/:lang", (req: Request, res: Response) => {
+  const { lang } = req.params;
+  try {
+    const translations = JSON.parse(fs.readFileSync(path.join("./locales", `${lang}.json`), "utf-8"));
+    res.json(translations);
+  } catch {
+    res.status(404).json({ message: "Translation not found" });
+  }
 });
 
-// GET PROFESSIONS -------------------------------------
-app.get("/api/professions", (req: any, res: any) => {
-  const db = readDB();
-  const professions = db.data.flatMap((group: any) => group.profession);
-  res.json(professions);
+// Получение новостей
+app.get("/api/news", (req: Request, res: Response) => {
+  const news = JSON.parse(fs.readFileSync("./news.json", "utf-8"));
+  const twoDaysAgo = Date.now() - 2 * 24 * 60 * 60 * 1000;
+  const filtered = news.filter((n: any) => new Date(n.date).getTime() >= twoDaysAgo);
+  res.json(filtered);
 });
 
-// Добавление в избранное
-app.post("/api/favorites", authMiddleware, (req: any, res: any) => {
+// Добавление профессии в избранное
+app.post("/api/favorites", authMiddleware, (req: Request, res: Response) => {
   const { professionId } = req.body;
   const db = readDB();
   const user = db.users.find((u: any) => u.userEmail === req.user.userEmail);
@@ -111,39 +124,20 @@ app.post("/api/favorites", authMiddleware, (req: any, res: any) => {
   res.json({ message: "Added to favorites" });
 });
 
-// Получение избранных
-app.get("/api/favorites", authMiddleware, (req: any, res: any) => {
+// Получение избранных профессий
+app.get("/api/favorites", authMiddleware, (req: Request, res: Response) => {
   const db = readDB();
   const user = db.users.find((u: any) => u.userEmail === req.user.userEmail);
   res.json(user.notification || []);
 });
 
-// ENDPOINT для переводов
-app.get("/api/translations/:lang", (req: any, res: any) => {
-  const { lang } = req.params;
-  try {
-    const translations = JSON.parse(fs.readFileSync(path.join("./locales", `${lang}.json`), "utf-8"));
-    res.json(translations);
-  } catch {
-    res.status(404).json({ message: "Translation not found" });
-  }
-});
-
-// Новостные данные
-app.get("/api/news", (req: any, res: any) => {
-  const news = JSON.parse(fs.readFileSync("./news.json", "utf-8"));
-  const twoDaysAgo = Date.now() - 2 * 24 * 60 * 60 * 1000;
-  const filtered = news.filter((n: any) => new Date(n.date).getTime() >= twoDaysAgo);
-  res.json(filtered);
-});
-
-// Роуты администратора для управления профессиями
-app.post("/api/admin/profession", authMiddleware, (req: any, res: any) => {
+// Админ роуты для профессий
+app.post("/api/admin/profession", authMiddleware, (req: Request, res: Response) => {
   const { groupName, professionName } = req.body;
   const db = readDB();
   if (req.user.role !== "admin") return res.status(403).json({ message: "Access denied" });
 
-  const group = db.data.find((g: any) => Object.values(g).includes(groupName));
+  const group = db.data.find((g: any) => g.groupName === groupName);
   if (!group) return res.status(404).json({ message: "Group not found" });
 
   const newProfession = {
@@ -158,7 +152,7 @@ app.post("/api/admin/profession", authMiddleware, (req: any, res: any) => {
   res.json({ message: "Profession added", profession: newProfession });
 });
 
-app.put("/api/admin/profession/:id", authMiddleware, (req: any, res: any) => {
+app.put("/api/admin/profession/:id", authMiddleware, (req: Request, res: Response) => {
   const { id } = req.params;
   const { newName } = req.body;
   const db = readDB();
@@ -172,7 +166,7 @@ app.put("/api/admin/profession/:id", authMiddleware, (req: any, res: any) => {
   res.json({ message: "Profession updated", profession: prof });
 });
 
-app.delete("/api/admin/profession/:id", authMiddleware, (req: any, res: any) => {
+app.delete("/api/admin/profession/:id", authMiddleware, (req: Request, res: Response) => {
   const { id } = req.params;
   const db = readDB();
   if (req.user.role !== "admin") return res.status(403).json({ message: "Access denied" });

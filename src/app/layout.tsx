@@ -1,8 +1,9 @@
 import Header from "@/widgets/header";
 import ThemeProvider from "./providers/page";
 import Footer from "@/widgets/footer";
-
-
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 export default function RootLayout({
   children,
