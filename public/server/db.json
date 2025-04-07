@@ -1,150 +1,18 @@
 {
     "users": [
         {
-            "userName": "zabirov kholid",
-            "userEmail": "zabirovkholid@gmail.com",
-            "userPhone": "55-666-9562",
-            "role": "admin",
-            "password": "123kholid333",
-            "confirmPassword": "123kholid33"
+            "name": "admin",
+            "surName": "kurbonov",
+            "email": "admin1@gmail.com",
+            "password": "admin2277",
+            "role": "Admin"
         },
         {
-            "userName": "aliev muhammad",
-            "userEmail": "aliev@gmail.com",
-            "userPhone": "98-726-6150",
-            "role": "client",
-            "password": "333kurbonikallakalon333",
-            "confirmPassword": "333kurbonikallakalon333",
-            "notification": [
-                {
-                    "professionName": "Агрокимиё ва хокшиносӣ",
-                    "professionId": "i8j2627h2u",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false
-                }
-            ]
-        }
-    ],
-    "data": [
-        {
-            "5st group of specialties": "Табиӣ ва техникӣ",
-            "profession": [
-                {
-                    "professionName": "Web-дизайн ва графикаи компютерӣ",
-                    "professionId": "1kkkk28276",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false,
-                    "specialty information": {
-                        "text": "",
-                        "img1": "",
-                        "img2": "",
-                        "img3": "",
-                        "img4": "",
-                        "img5": "",
-                        "img6": "",
-                        "img7": "",
-                        "img8": "",
-                        "img9": "",
-                        "img10": ""
-                    }
-                }
-            ]
-        },
-        {
-            "4st group of specialties": "Иқтисод ва география",
-            "profession": [
-                {
-                    "professionName": "Андоз ва андозбандӣ",
-                    "professionId": "3iijene787",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false,
-                    "specialty information": {
-                        "text": "",
-                        "img1": "",
-                        "img2": "",
-                        "img3": "",
-                        "img4": "",
-                        "img5": "",
-                        "img6": "",
-                        "img7": "",
-                        "img8": "",
-                        "img9": "",
-                        "img10": ""
-                    }
-                }
-            ]
-        },
-        {
-            "3st group of specialties": "Филология, педагогика ва санъат",
-            "profession": [
-                {
-                    "professionName": "Web-журналистика",
-                    "professionId": "m3855gd6j3",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false,
-                    "specialty information": {
-                        "text": "",
-                        "img1": "",
-                        "img2": "",
-                        "img3": "",
-                        "img4": "",
-                        "img5": "",
-                        "img6": "",
-                        "img7": "",
-                        "img8": "",
-                        "img9": "",
-                        "img10": ""
-                    }
-                }
-            ]
-        },
-        {
-            "4st group of specialties": "Ҷомеашиносӣ ва ҳуқуқ",
-            "profession": [
-                {
-                    "professionName": "Бойгоншиносӣ",
-                    "professionId": "8j3ikdh2w9",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false,
-                    "specialty information": {
-                        "text": "",
-                        "img1": "",
-                        "img2": "",
-                        "img3": "",
-                        "img4": "",
-                        "img5": "",
-                        "img6": "",
-                        "img7": "",
-                        "img8": "",
-                        "img9": "",
-                        "img10": ""
-                    }
-                }
-            ]
-        },
-        {
-            "5st group of specialties": "Тиб, биология ва варзиш",
-            "profession": [
-                {
-                    "professionName": "Агрокимиё ва хокшиносӣ",
-                    "professionId": "i8j2627h2u",
-                    "createAt": "2025-03-24T12:50:21.535Z",
-                    "notification": false,
-                    "specialty information": {
-                        "text": "",
-                        "img1": "",
-                        "img2": "",
-                        "img3": "",
-                        "img4": "",
-                        "img5": "",
-                        "img6": "",
-                        "img7": "",
-                        "img8": "",
-                        "img9": "",
-                        "img10": ""
-                    }
-                }
-            ]
+            "name": "xalid",
+            "surName": "zabirov",
+            "email": "zabirov@gmail.com",
+            "password": "kholidjon123",
+            "role": "User"
         }
     ]
 }

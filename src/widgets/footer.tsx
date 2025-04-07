@@ -1,7 +1,14 @@
+'use client'
 import React from 'react'
 import Maxwidth from './max-width'
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
+    let router = usePathname()
+    console.log(router);
+  if(router == "/login" || router == "/register" ){
+    return ""
+  }
   return (
      <div className='' style={{background: "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)"}}>
           <Maxwidth>
